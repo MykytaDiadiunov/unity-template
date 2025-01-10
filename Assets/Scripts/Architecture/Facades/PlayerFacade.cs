@@ -13,10 +13,8 @@ namespace Assets.Scripts.Architecture.Facades
             private set { }
         }
 
-
         private static PlayerInteractor playerInteractor;
         private static bool isInitialize;
-
 
         public static void AddCoins(int count)
         {
@@ -26,11 +24,13 @@ namespace Assets.Scripts.Architecture.Facades
 
         public static void SpendCoins(int count)
         {
+            FacadeIsInitialized();
             playerInteractor.SpendCoins(count);
         }
 
         public static void SaveByDefault()
         {
+            FacadeIsInitialized();
             playerInteractor.SaveByDefault();
         }
 

@@ -23,10 +23,17 @@ namespace Assets.Scripts.Architecture
             }
         }
 
-        private void CreateInteractor<T>() where T : Interactor, new()
+        public void CreateAndInitializeInteractorByType<T>() where T : Interactor, new()
+        {
+            Interactor interactor = CreateInteractor<T>();
+            interactor.Initialize();
+        }
+
+        private Interactor CreateInteractor<T>() where T : Interactor, new()
         {
             var interactor = new T();
             interactors.Add(typeof(T), interactor);
+            return interactor;
         }
     }
 }

@@ -1,7 +1,7 @@
-using Assets.Scripts.Architecture.Facades;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Architecture.Facades;
 
 public class Test : MonoBehaviour
 {
@@ -12,12 +12,13 @@ public class Test : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             PlayerFacade.AddCoins(10);
             Debug.Log(PlayerFacade.Coins);
         }
-        if(Input.GetKeyDown(KeyCode.S))
+
+        if (Input.GetKeyDown(KeyCode.S))
         {
             PlayerFacade.SpendCoins(10);
             Debug.Log(PlayerFacade.Coins);
