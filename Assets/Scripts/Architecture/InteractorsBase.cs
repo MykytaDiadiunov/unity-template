@@ -1,5 +1,4 @@
-﻿
-using Assets.Scripts.Architecture.BaseClasses.Abstractions;
+﻿using Assets.Scripts.Architecture.BaseClasses.Abstractions;
 using Assets.Scripts.Architecture.Interactors;
 using System;
 using System.Collections.Generic;
@@ -23,10 +22,23 @@ namespace Assets.Scripts.Architecture
             }
         }
 
-        public void CreateAndInitializeInteractorByType<T>() where T : Interactor, new()
+        public void CreateAndInitializeInteractorsByTypeArray(Type[] types)
         {
-            Interactor interactor = CreateInteractor<T>();
-            interactor.Initialize();
+            foreach (Type interactorType in types)
+            {
+                if (!typeof(Interactor).IsAssignableFrom(interactorType))
+                {
+                    throw new ArgumentException($"Type {interactorType} does not inherit from Interactor");
+                }
+
+                Interactor interactor = (Interactor)Activator.CreateInstance(interactorType);
+                if (!interactors.ContainsKey(interactorType))
+                {
+                    interactors.Add(interactorType, interactor);
+                }
+
+                interactor.Initialize();
+            }
         }
 
         private Interactor CreateInteractor<T>() where T : Interactor, new()
